@@ -1,58 +1,30 @@
 import express from 'express'
-import conexion from './database/db.js'
+import multer from 'multer'
+import * as crud from './controllers/crud.js'
 
+
+const upload = multer()
 const router = express.Router()
 
-router.get('/',(req,res)=>{
-    
-    
-    conexion.query('SELECT * FROM `prod`',(error,results)=>{
-        if (error) {
-            throw error;
-        }else{
-            res.render('index',{results:results});
-        }
-    })
-    
-})
+//////////////////////////////////////////////////////////////////////
+///////////////////////////URL de productos///////////////////////////
+//////////////////////////////////////////////////////////////////////
 
-
-//RUTA PARA CREAR PRODUCTO
-
+router.get('/',crud.listado)
 router.get ('/create',(req,res)=>{
     res.render('create');
 })
+router.get('/edit/:prod_id', crud.dataUpdate)
+router.get('/delete/:prod_id', crud.Eliminar)
 
-//RUTA PARA EDITAR REGISTRO
-router.get('/edit/:prod_id',(req,res)=>{
-    const id = req.params.prod_id
-    conexion.query('SELECT * FROM prod WHERE prod_id  = ?',[id],(error,results)=>{
-        if (error) {
-            throw error;
-        }else{
-            res.render('edit',{prod:results[0]});
-        }
-    })
+//////////////////rutas de acciones de productos////////////////////
 
+router.post('/save',upload.none(),crud.save);
+router.post('/update',upload.none(),crud.update);
 
-})
-//RUTA PARA ELIMINAR EL REGISTRO//
-router.get('/delete/:prod_id', (req, res)=>{
-    const id = req.params.prod_id;
-    conexion.query('DELETE FROM prod WHERE prod_id = ?',[id],(error,results)=>{
-        if (error) {
-            throw error;
-        }else{
-            res.redirect('/');
-        }
-    })
-})
-
-
-import * as crud from './controllers/crud.js'
-router.post('/save',crud.save);
-router.post('/update',crud.update);
-
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 
 export default router;
