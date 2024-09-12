@@ -27,10 +27,6 @@
                 <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
             </ul>
-            <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
         </div>
         </div>
       </nav>
@@ -60,21 +56,12 @@
     <script>
         const form = document.getElementById('formulario');
         form.onsubmit = async (e) => {
-            e.preventDefault(); // Evitar el envío por defecto
-    
+            e.preventDefault();
             const formData = new FormData(form);
-            
-            // Inspeccionar los datos del formulario
-            for (const [key, value] of formData.entries()) {
-                console.log(`${key}: ${value}`); // Muestra cada par clave-valor
-            }
-            
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
             });
-            
-            console.log(response); // Muestra la respuesta del servidor
             const result = await response.json();
     
             if (result.error) {

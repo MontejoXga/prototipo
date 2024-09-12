@@ -42,11 +42,13 @@ export const dataUpdate = (req,res)=>{
 
 export const Eliminar = (req,res)=>{
     const id = req.params.prod_id;
+    console.log(id)
     conexion.query('DELETE FROM prod WHERE prod_id = ?',[id],(error,results)=>{
         if (error) {
-            throw error;
+            return res.json({error: "Ocurrio un error en la base de datos!!"})
         }else{
-            res.redirect('/');
+            return res.json({success: "El producto se elimino correctamente"})
+            //res.redirect('/');
         }
     })
 }
