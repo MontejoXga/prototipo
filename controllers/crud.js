@@ -42,7 +42,6 @@ export const dataUpdate = (req,res)=>{
 
 export const Eliminar = (req,res)=>{
     const id = req.params.prod_id;
-    console.log(id)
     conexion.query('DELETE FROM prod WHERE prod_id = ?',[id],(error,results)=>{
         if (error) {
             return res.json({error: "Ocurrio un error en la base de datos!!"})
@@ -57,6 +56,7 @@ export const save = (req, res)=>{
     
     const prod = req.body.producto;
     const obs = req.body.obs;
+    const precio = req.body.precio
     const isEmpty = (value) => {
         return value === undefined || value === null || value.trim() === '';
     }
@@ -72,7 +72,7 @@ export const save = (req, res)=>{
                         obs: obs
                     })
                 } else {
-                    conexion.query('INSERT INTO prod SET ?', { nombre: prod, obs: obs }, (error, results) => {
+                    conexion.query('INSERT INTO prod SET ?', { nombre: prod, obs: obs, precio:precio }, (error, results) => {
                         if (error) {
                             console.log(error);
                             res.json({ error: "Hubo un problema al guardar en la base de datos!", nombre: prod, obs: obs });
@@ -93,6 +93,7 @@ export const update = (req, res)=>{
     const id = req.body.id;
     const prod = req.body.producto;
     const obs = req.body.obs;
+    const precio = req.body.precio
     const isEmpty = (value) => {
         return value === undefined || value === null || value.trim() === '';
     }
@@ -109,7 +110,7 @@ export const update = (req, res)=>{
                         console.log(results.length)
                         if (results.length == 1 ) {
     
-                            conexion.query('UPDATE prod SET ? WHERE prod_id = ?',[{nombre:prod, obs:obs}, id], (error,results)=>{
+                            conexion.query('UPDATE prod SET ? WHERE prod_id = ?',[{nombre:prod, obs:obs, precio:precio}, id], (error,results)=>{
                                 if (error) {
                                     console.log(error);
                                     res.json({ error: "Hubo un problema al guardar en la base de datos!", nombre: prod, obs: obs });
@@ -123,7 +124,7 @@ export const update = (req, res)=>{
                     });               
                     
                 } else {
-                    conexion.query('UPDATE prod SET ? WHERE prod_id = ?',[{nombre:prod, obs:obs}, id], (error,results)=>{
+                    conexion.query('UPDATE prod SET ? WHERE prod_id = ?',[{nombre:prod, obs:obs, precio:precio}, id], (error,results)=>{
                         if (error) {
                             console.log(error);
                             res.json({ error: "Hubo un problema al guardar en la base de datos!", nombre: prod, obs: obs });

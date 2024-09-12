@@ -37,12 +37,16 @@
             <div class="card-body">
                 <form action="/save" id="formulario" method="POST" >
                     <div class="mb-3">
-                        <label for="producto" class="form-label">Email address</label>
+                        <label for="producto" class="form-label">Nombre del producto</label>
                         <input type="text" class="form-control" id="producto" name="producto">
                     </div>
                     <div class="mb-3">
-                        <label for="obs" class="form-label">Password</label>
+                        <label for="obs" class="form-label">Observacion</label>
                         <input type="text" class="form-control" id="obs" name="obs">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/" class="btn btn-secundary">Cancelar</a>

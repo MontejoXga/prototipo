@@ -42,16 +42,19 @@
               <th scope="col">ID</th>
               <th scope="col">PRODUCTO</th>
               <th scope="col">ABREVIATURA</th>
+              <th scope="col">PRECIO</th>
               <th scope="col">ACCIONES</th>
             </tr>
           </thead>
           <tbody>
+            <% contador = 1 %>
             <% results.forEach((prod)=> { %>
               <tr id="<%= prod.prod_id %>">
 
-                <td><%= prod.prod_id %></td>
+                <td><%= contador %></td>
                 <td><%= prod.nombre %></td>
                 <td><%= prod.obs %></td>
+                <td><%= prod.precio%></td>
                 <td>
                   <a href="/edit/<%= prod.prod_id %>" class="btn btn-outline-info">editar</a>
                   
@@ -59,6 +62,7 @@
                 </td>
               
               </tr>
+            <% contador++ %>
             <% }) %>
           </tbody>
         </table>

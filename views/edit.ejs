@@ -39,12 +39,16 @@
                 <form id="formulario" action="/update" method="POST">
                     <input id="id" name="id" value="<%= prod.prod_id %>" hidden>
                     <div class="mb-3">
-                        <label for="producto" class="form-label">nombre de producto</label>
+                        <label for="producto" class="form-label">Nombre del producto</label>
                         <input type="text" class="form-control" id="producto" name="producto" value="<%= prod.nombre %>">
                     </div>
                     <div class="mb-3">
-                        <label for="obs" class="form-label">Password</label>
+                        <label for="obs" class="form-label">Descripcion</label>
                         <input type="text" class="form-control" id="obs" name="obs" value="<%= prod.obs %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" value="<%= prod.precio %>">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/" class="btn btn-secundary">Cancelar</a>
