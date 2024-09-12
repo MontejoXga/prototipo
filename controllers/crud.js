@@ -60,7 +60,7 @@ export const save = (req, res)=>{
     const isEmpty = (value) => {
         return value === undefined || value === null || value.trim() === '';
     }
-    if (isEmpty(prod)||isEmpty(obs)) {
+    if (isEmpty(prod)||isEmpty(obs)||isEmpty(precio)) {
         return res.json({ error: "Los campos producto y observaciones no pueden estar vacíos." });
     }else{
         validar(prod)
@@ -97,7 +97,7 @@ export const update = (req, res)=>{
     const isEmpty = (value) => {
         return value === undefined || value === null || value.trim() === '';
     }
-    if (isEmpty(prod)||isEmpty(obs)) {
+    if (isEmpty(prod)||isEmpty(obs)||isEmpty(precio)) {
         return res.json({ error: "Los campos id, producto y observaciones no pueden estar vacíos." });
     }else{
         validar(prod,id)
