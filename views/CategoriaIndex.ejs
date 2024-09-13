@@ -6,32 +6,32 @@
           <div class="col-12 py-5">
             <div class="card">
               <div class="card-header">
-                <a href="/create" class="btn btn-outline-primary"><i class='bx bx-plus-circle bx-md'></i></a>
+                <a href="/categoria/create" class="btn btn-outline-primary"><i class='bx bx-plus-circle bx-md'></i></a>
               </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap m-0">
                   <thead>
                     <tr class="bg-primary text-white">
-                      <th scope="col">ID</th>
-                      <th scope="col">PRODUCTO</th>
-                      <th scope="col">ABREVIATURA</th>
-                      <th scope="col">PRECIO</th>
-                      <th scope="col">ACCIONES</th>
+                      <th scope="col">N°</th>
+                      <th scope="col">Categoria</th>
+                      <th scope="col">Abreviatura</th>
+                      <th scope="col">Descripcion</th>
+                      <th scope="col">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     <% contador = 1 %>
-                    <% results.forEach((prod)=> { %>
-                      <tr id="<%= prod.prod_id %>">
+                    <% results.forEach((categoria)=> { %>
+                      <tr id="<%= categoria.id_cat %>">
         
                         <td><%= contador %></td>
-                        <td><%= prod.nombre %></td>
-                        <td><%= prod.obs %></td>
-                        <td><%= prod.precio%></td>
+                        <td><%= categoria.categoria %></td>
+                        <td><%= categoria.abre_cate %></td>
+                        <td><%= categoria.descr_cate %></td>
                         <td>
-                          <a href="/edit/<%= prod.prod_id %>" class="btn btn-outline-info">editar</a>
+                          <a href="/categoria/edit/<%= categoria.id_cat %>" class="btn btn-outline-info">editar</a>
                           
-                          <button id="eliminar" value="<%= prod.prod_id %>" class="eliminar btn btn-outline-danger">borrar</button>
+                          <button id="eliminar" value="<%= categoria.id_cat %>" class="eliminar btn btn-outline-danger">borrar</button>
                         </td>
                       
                       </tr>
@@ -66,14 +66,14 @@
   
           if (result.isConfirmed) {
             try {
-              const respuesta = await fetch(`/delete/${boton.value}`, {
+              const respuesta = await fetch(`/categoria/delete/${boton.value}`, {
                 method: 'GET' 
               });
   
               if (respuesta.ok) {
                 Swal.fire({
                   title: "¡Eliminado!",
-                  text: "El producto ha sido eliminado.",
+                  text: "La categoria se ha eliminado.",
                   icon: "success"
                 }).then(()=>{
                   
@@ -85,7 +85,7 @@
               } else {
                 Swal.fire({
                   title: "Error",
-                  text: "No se pudo eliminar el producto.",
+                  text: "No se pudo eliminar la categoria.",
                   icon: "error"
                 });
               }

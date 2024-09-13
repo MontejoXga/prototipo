@@ -1,27 +1,28 @@
 <%- include('plantilla/header.ejs') %>
 
 
-      <% if (prod) { %>
+      <% if (categoria) { %>
       <div class="container mt-4">
         <div class="card border-secundary">
-            <div class="card-header">Nuevo</div>
+            <div class="card-header">Editar Categoria</div>
             <div class="card-body">
-                <form id="formulario" action="/update" method="POST">
-                    <input id="id" name="id" value="<%= prod.prod_id %>" hidden>
+                <form action="/categoria/update" id="formulario" method="POST" >
+                    <input id="id" name="id" value="<%= categoria.id_cat %>" hidden>
                     <div class="mb-3">
-                        <label for="producto" class="form-label">Nombre del producto</label>
-                        <input type="text" class="form-control" id="producto" name="producto" value="<%= prod.nombre %>">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <input type="text" class="form-control" id="categoria" name="categoria" value="<%= categoria.categoria %>">
                     </div>
                     <div class="mb-3">
-                        <label for="obs" class="form-label">Descripcion</label>
-                        <input type="text" class="form-control" id="obs" name="obs" value="<%= prod.obs %>">
+                        <label for="abreviatura" class="form-label">Abreviatura</label>
+                        <input type="text" class="form-control" id="abreviatura" name="abreviatura" value="<%= categoria.abre_cate %>">
                     </div>
                     <div class="mb-3">
-                        <label for="precio" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="precio" name="precio" value="<%= prod.precio %>">
+                        <label for="descripcion" class="form-label">Descripcion</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" style="height: 100px"><%= categoria.descr_cate %></textarea>
+
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="/" class="btn btn-secundary">Cancelar</a>
+                    <a href="/categoria" class="btn btn-secundary">Cancelar</a>
                 </form>
 
             </div>
@@ -39,7 +40,7 @@
             body: formData,
         });
         const result = await response.json();
-
+        console.log(result)
         if (result.error) {
             Swal.fire({
                 icon: 'error',
