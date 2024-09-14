@@ -17,6 +17,18 @@
                         <label for="precio" class="form-label">Precio</label>
                         <input type="number" class="form-control" id="precio" name="precio">
                     </div>
+                    <div class="md-3">
+                        <label for="SelectProveedor" class="form-label">Proveedor</label>
+                        <select class="form-select" id="SelectProveedor" name="SelectProveedor" aria-label="Default select example">
+                            <option value="" selected disabled>Seleccione</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="SelectCategoria" class="form-label">Categoria</label>
+                        <select class="form-select" id="SelectCategoria" name="SelectCategoria" aria-label="Default select example">
+                            <option selected value="" disabled>Seleccione</option>
+                          </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/" class="btn btn-secundary">Cancelar</a>
                 </form>
@@ -26,10 +38,47 @@
       </div>
 
     <script>
+        const active = document.getElementById('inicio');
+        active.classList.add('active');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/create/proveedor')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('SelectProveedor');
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id_prod; // Asigna el valor
+                    option.textContent = item.proveedor; // Asigna el texto visible
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar datos:', error));
+
+
+            fetch('/create/categoria')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('SelectCategoria');
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id_cat; // Asigna el valor
+                    option.textContent = item.categoria; // Asigna el texto visible
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar datos:', error));
+        });
+
+
+
         const form = document.getElementById('formulario');
         form.onsubmit = async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
+            for (const [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,

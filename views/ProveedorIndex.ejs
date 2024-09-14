@@ -6,36 +6,30 @@
           <div class="col-12 py-5">
             <div class="card">
               <div class="card-header">
-                <a href="/create" class="btn btn-outline-primary"><i class='bx bx-plus-circle bx-md'></i></a>
+                <a href="/proveedor/create" class="btn btn-outline-primary"><i class='bx bx-plus-circle bx-md'></i></a>
               </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap m-0">
                   <thead>
                     <tr class="bg-primary text-white">
-                      <th scope="col">ID</th>
-                      <th scope="col">PRODUCTO</th>
-                      <th scope="col">ABREVIATURA</th>
-                      <th scope="col">PROVEEDOR</th>
-                      <th scope="col">CATEGORIA</th>
-                      <th scope="col">PRECIO</th>
-                      <th scope="col">ACCIONES</th>
+                      <th scope="col">N°</th>
+                      <th scope="col">Proveedor</th>
+                      <th scope="col">RUC</th>
+                      <th scope="col">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     <% contador = 1 %>
-                    <% results.forEach((prod)=> { %>
-                      <tr id="<%= prod.prod_id %>">
+                    <% results.forEach((proveedor)=> { %>
+                      <tr id="<%= proveedor.id_prod %>">
         
                         <td><%= contador %></td>
-                        <td><%= prod.nombre %></td>
-                        <td><%= prod.obs %></td>
-                        <td><%= prod.proveedor %></td>
-                        <td><%= prod.categoria %></td>
-                        <td><%= prod.precio%></td>
+                        <td><%= proveedor.proveedor %></td>
+                        <td><%= proveedor.ruc %></td>
                         <td>
-                          <a href="/edit/<%= prod.prod_id %>" class="btn btn-outline-info">editar</a>
+                          <a href="/proveedor/edit/<%= proveedor.id_prod %>" class="btn btn-outline-info">editar</a>
                           
-                          <button id="eliminar" value="<%= prod.prod_id %>" class="eliminar btn btn-outline-danger">borrar</button>
+                          <button id="eliminar" value="<%= proveedor.id_prod %>" class="eliminar btn btn-outline-danger">borrar</button>
                         </td>
                       
                       </tr>
@@ -51,10 +45,9 @@
       </div>
 
   <script>
-
-    const active = document.getElementById('inicio');
+    const active = document.getElementById('proveedor');
     active.classList.add('active');
-
+    
     document.addEventListener('DOMContentLoaded', () => {
       const click = document.querySelectorAll('.eliminar'); // Selecciona todos los botones con la clase 'eliminar'
   
@@ -74,14 +67,14 @@
   
           if (result.isConfirmed) {
             try {
-              const respuesta = await fetch(`/delete/${boton.value}`, {
+              const respuesta = await fetch(`/proveedor/delete/${boton.value}`, {
                 method: 'GET' 
               });
   
               if (respuesta.ok) {
                 Swal.fire({
                   title: "¡Eliminado!",
-                  text: "El producto ha sido eliminado.",
+                  text: "La categoria se ha eliminado.",
                   icon: "success"
                 }).then(()=>{
                   
@@ -93,7 +86,7 @@
               } else {
                 Swal.fire({
                   title: "Error",
-                  text: "No se pudo eliminar el producto.",
+                  text: "No se pudo eliminar la categoria.",
                   icon: "error"
                 });
               }

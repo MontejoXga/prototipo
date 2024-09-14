@@ -2,23 +2,19 @@
 
       <div class="container mt-4">
         <div class="card border-secundary">
-            <div class="card-header">Nueva Categoria</div>
+            <div class="card-header">Nueva Proveedor</div>
             <div class="card-body">
-                <form action="/categoria/save" id="formulario" method="POST" >
+                <form action="/proveedor/save" id="formulario" method="POST" >
                     <div class="mb-3">
-                        <label for="categoria" class="form-label">Categoria</label>
-                        <input type="text" class="form-control" id="categoria" name="categoria">
+                        <label for="proveedor" class="form-label">Proveedor</label>
+                        <input type="text" class="form-control" id="proveedor" name="proveedor">
                     </div>
                     <div class="mb-3">
-                        <label for="abreviatura" class="form-label">Abreviatura</label>
-                        <input type="text" class="form-control" id="abreviatura" name="abreviatura">
-                    </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripcion</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion">
+                        <label for="ruc" class="form-label">RUC</label>
+                        <input type="number" class="form-control" id="ruc" name="ruc">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="/categoria" class="btn btn-secundary">Cancelar</a>
+                    <a href="/proveedor" class="btn btn-secundary">Cancelar</a>
                 </form>
 
             </div>
@@ -26,7 +22,7 @@
       </div>
 
     <script>
-        const active = document.getElementById('categoria');
+        const active = document.getElementById('proveedor');
         active.classList.add('active');
 
         const form = document.getElementById('formulario');

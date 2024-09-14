@@ -20,6 +20,20 @@
                         <label for="precio" class="form-label">Precio</label>
                         <input type="number" class="form-control" id="precio" name="precio" value="<%= prod.precio %>">
                     </div>
+                    <div class="md-3">
+                        <label for="SelectProveedor" class="form-label">Proveedor</label>
+                        <input type="hidden" value="<%= prod.id_proveedor %>" name="id_proveedor" id="id_proveedor">
+                        <select class="form-select" id="SelectProveedor" name="SelectProveedor" aria-label="Default select example">
+                            <option value="" selected disabled>Seleccione</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="SelectCategoria" class="form-label">Categoria</label>
+                        <input type="hidden" value="<%= prod.id_categoria %>" name="id_categoria" id="id_categoria">
+                        <select class="form-select" id="SelectCategoria" name="SelectCategoria" aria-label="Default select example">
+                            <option selected value="" disabled>Seleccione</option>
+                          </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/" class="btn btn-secundary">Cancelar</a>
                 </form>
@@ -30,6 +44,48 @@
       <% } %>
 
   <script>
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/create/proveedor')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('SelectProveedor');
+            const IDedit = document.getElementById('id_proveedor').value
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id_prod; // Asigna el valor
+                option.textContent = item.proveedor; // Asigna el texto visible
+                select.appendChild(option);
+                if (option.value == IDedit) {
+                    option.selected = true
+                }
+            });
+        })
+        .catch(error => console.error('Error al cargar datos:', error));
+
+
+        fetch('/create/categoria')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('SelectCategoria');
+            const IDedit = document.getElementById('id_categoria').value
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id_cat; // Asigna el valor
+                option.textContent = item.categoria; // Asigna el texto visible
+                select.appendChild(option);
+                if (option.value == IDedit) {
+                    option.selected = true
+                }
+            });
+        })
+        .catch(error => console.error('Error al cargar datos:', error));
+    });
+
+    const active = document.getElementById('inicio');
+    active.classList.add('active');
+    
     const form = document.getElementById('formulario');
     form.onsubmit = async (e) => {
         e.preventDefault();
